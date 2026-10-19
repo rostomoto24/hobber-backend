@@ -46,6 +46,8 @@ Demo logins (seeded by the migrations): `salome@hobber.dev` (student) and `ana@h
 
 ## Conventions in this code base
 
+- HTTPS redirection is disabled in Development on purpose: the web app calls `http://localhost:51015` and a 307 to HTTPS breaks CORS. Do not re-enable it for dev.
+
 - A use case = one `*Handler` class with `HandleAsync`, returning `Result<T>` or `Result`. Validation through `Validator` yields `Error.Validation(fields)`; other failures use `Error.Conflict/NotFound/Forbidden/Unauthorized(code, message)` with a stable snake_case `code` (listed in `../docs/api/endpoints.md`).
 - Enums are projected as enums and converted to strings in memory (`Mapping.ToSummaryListAsync`); EF cannot translate `enum.ToString()`.
 - Dates are `DateTime` UTC (SQLite in tests cannot order `DateTimeOffset`).

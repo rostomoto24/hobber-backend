@@ -99,7 +99,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// In Development the API is called over plain http://localhost:51015 from the web app; redirecting to
+// HTTPS would answer every call with 307 and break CORS. Production terminates TLS and keeps the redirect.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
 app.UseCors();
 
 app.UseAuthentication();
