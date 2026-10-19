@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TeachMe.Application.Abstractions;
 using TeachMe.Persistance.Contexts;
 
 namespace TeachMe.Persistance;
@@ -11,6 +12,8 @@ public static class DependencyInjection
     {
         services.AddDbContext<TeachMeDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddScoped<IAppDbContext>(sp => sp.GetRequiredService<TeachMeDbContext>());
 
         return services;
     }
