@@ -1,4 +1,4 @@
-# Hobber backend (repo still named Hobber)
+# Hobber backend
 
 .NET 8 clean-architecture API for Hobber, a marketplace for hobby courses. Product context, decisions and status live one level up in `../docs/`; read `../docs/STATUS.md` and `../docs/DECISIONS.md` first, then `../docs/backlog/backend.md` and the newest entries in `../docs/status/*.md` once those exist.
 
@@ -51,9 +51,8 @@ Demo logins after seeding: `salome@hobber.dev` (student) and `ana@hobber.dev` (t
 
 ## Known gaps
 
-1. Rename to `Hobber.*` pending decision D2.
-2. Last-seat enrolment race not prevented; no auth rate limiting; e-mail is a log stub (Phase 5).
-3. Social login, notifications list, calendar feed, tutor course CRUD not built.
+1. Last-seat enrolment race not prevented; no auth rate limiting; e-mail is a log stub (Phase 5).
+2. Social login, notifications list, calendar feed, tutor course CRUD not built.
 
 ## Working rules
 
@@ -71,3 +70,4 @@ Demo logins after seeding: `salome@hobber.dev` (student) and `ana@hobber.dev` (t
 | 2026-05-07 | Repo created, skeleton generated via Codex (PR #1), connection string set to `localhost` |
 | 2026-10-19 | Audit: builds green, nothing else changed since May. This file added. |
 | 2026-10-19 | Identity, onboarding and discovery API: 9 entities, 17 endpoints, migration, seeder, 22 tests, CI. Branch `feat/2-identity-discovery-api`, PR opened. |
+| 2026-10-20 | Renamed TeachMe → Hobber (solution, projects, namespaces, DbContext, CI); GitHub repo renamed `hobber-backend`. Build-check rule added after a stray API process caused `MSB3027` lock errors. |
