@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Hobber.API.Infrastructure;
 using Hobber.Application.Auth;
 using Hobber.Application.Contracts;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Hobber.API.Controllers;
 
@@ -27,6 +27,25 @@ public sealed class AuthController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Login([FromBody] LoginRequest request, [FromServices] LoginHandler handler, CancellationToken ct) =>
         (await handler.HandleAsync(request, ct)).ToActionResult(this);
+
+    /// <summary>
+    /// Sign up or log in with Google (ID token) or Facebook (user access token). Links to an existing account
+    /// with the same verified e-mail; creates an account when <c>profileType</c> is given; otherwise 404
+    /// <c>account_not_found</c>. 409 <c>provider_not_configured</c> when the provider has no credentials.
+    /// </summary>
+    [HttpPost("social")]
+    [ProducesResponseType(typeof(AuthResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> Social([FromBody] SocialLoginRequest request, [FromServices] SocialLoginHandler handler, CancellationToken ct) =>
+        (await handler.HandleAsync(request, ct)).ToActionResult(this);
+
+    /// <summary>Which social providers the server can verify; the app enables the matching buttons.</summary>
+    [HttpGet("providers")]
+    [ProducesResponseType(typeof(AuthProvidersDto), StatusCodes.Status200OK)]
+    public ActionResult<AuthProvidersDto> Providers([FromServices] GetAuthProvidersHandler handler) => Ok(handler.Handle());
 
     /// <summary>Exchange a refresh token for a new access + refresh pair (the old refresh token is revoked).</summary>
     [HttpPost("refresh")]

@@ -11,7 +11,8 @@ public sealed class User
 
     public string? Phone { get; set; }
 
-    public string PasswordHash { get; set; } = string.Empty;
+    /// <summary>Null for accounts created through Google or Facebook that never set a password.</summary>
+    public string? PasswordHash { get; set; }
 
     /// <summary>Optional until D9 decides where the name is collected. Home greets by first name.</summary>
     public string? FirstName { get; set; }
@@ -27,6 +28,8 @@ public sealed class User
     public DateTime CreatedAt { get; set; }
 
     public ICollection<UserInterest> Interests { get; set; } = new List<UserInterest>();
+
+    public ICollection<ExternalLogin> ExternalLogins { get; set; } = new List<ExternalLogin>();
 
     /// <summary>Name shown in "Hi, {name}"; falls back to the e-mail local part when no name is known.</summary>
     public string DisplayName =>

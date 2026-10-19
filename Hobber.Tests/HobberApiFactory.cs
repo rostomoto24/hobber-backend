@@ -31,6 +31,9 @@ public sealed class HobberApiFactory : WebApplicationFactory<Program>
 
         builder.ConfigureTestServices(services =>
         {
+            services.RemoveAll<ISocialIdentityVerifier>();
+            services.AddScoped<ISocialIdentityVerifier, FakeSocialIdentityVerifier>();
+
             services.RemoveAll<DbContextOptions<HobberDbContext>>();
             services.RemoveAll<HobberDbContext>();
 

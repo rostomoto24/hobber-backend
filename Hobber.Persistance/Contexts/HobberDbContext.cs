@@ -1,12 +1,14 @@
-using Microsoft.EntityFrameworkCore;
 using Hobber.Application.Abstractions;
 using Hobber.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hobber.Persistance.Contexts;
 
 public sealed class HobberDbContext(DbContextOptions<HobberDbContext> options) : DbContext(options), IAppDbContext
 {
     public DbSet<User> Users => Set<User>();
+
+    public DbSet<ExternalLogin> ExternalLogins => Set<ExternalLogin>();
 
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 

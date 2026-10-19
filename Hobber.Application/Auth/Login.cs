@@ -1,7 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using Hobber.Application.Abstractions;
 using Hobber.Application.Common;
 using Hobber.Application.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hobber.Application.Auth;
 
@@ -27,7 +27,8 @@ public sealed class LoginHandler(IAppDbContext db, IPasswordHasher hasher, Token
         var email = request.Email!.Trim().ToLowerInvariant();
         var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
 
-        if (user is null || !hasher.Verify(user.PasswordHash, request.Password!))
+        // Accounts created through Google/Facebook have no password until they set one via "Forgot password".
+        if (user is null || user.PasswordHash is null || !hasher.Verify(user.PasswordHash, request.Password!))
         {
             return InvalidCredentials;
         }

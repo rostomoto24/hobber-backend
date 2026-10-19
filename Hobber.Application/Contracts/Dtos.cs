@@ -13,12 +13,14 @@ public sealed record UserDto(
     string ProfileType,
     IReadOnlyList<CategoryDto> Interests);
 
+/// <summary><paramref name="IsNewUser"/> is true when a social sign-in just created the account (route Students to Interests).</summary>
 public sealed record AuthResponse(
     UserDto User,
     string AccessToken,
     DateTime AccessTokenExpiresAt,
     string RefreshToken,
-    DateTime RefreshTokenExpiresAt);
+    DateTime RefreshTokenExpiresAt,
+    bool IsNewUser = false);
 
 /// <summary>What a course card on Home shows: image, title, tutor, enrolled/capacity.</summary>
 public sealed record CourseSummaryDto(

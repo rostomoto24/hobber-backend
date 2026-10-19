@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using Hobber.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hobber.Application.Abstractions;
 
@@ -7,6 +7,8 @@ namespace Hobber.Application.Abstractions;
 public interface IAppDbContext
 {
     DbSet<User> Users { get; }
+
+    DbSet<ExternalLogin> ExternalLogins { get; }
 
     DbSet<RefreshToken> RefreshTokens { get; }
 

@@ -1,10 +1,10 @@
-using Microsoft.Extensions.DependencyInjection;
 using Hobber.Application.Auth;
 using Hobber.Application.Categories;
 using Hobber.Application.Courses;
 using Hobber.Application.Me;
 using Hobber.Application.Notifications;
 using Hobber.Application.Search;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hobber.Application;
 
@@ -15,6 +15,8 @@ public static class DependencyInjection
         services.AddScoped<TokenIssuer>();
         services.AddScoped<RegisterHandler>();
         services.AddScoped<LoginHandler>();
+        services.AddScoped<SocialLoginHandler>();
+        services.AddScoped<GetAuthProvidersHandler>();
         services.AddScoped<RefreshHandler>();
         services.AddScoped<LogoutHandler>();
         services.AddScoped<ForgotPasswordHandler>();
