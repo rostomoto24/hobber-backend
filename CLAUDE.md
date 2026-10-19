@@ -13,7 +13,7 @@ The Backend role owns everything in this repo. Outside it, only append to `../do
 | `Hobber.Domain` | Entities (`User`, `Course`, `Category`, `Enrollment`, …) and enums; static rule helpers on `Course` | nothing |
 | `Hobber.Application` | One handler class per use case (`Auth/`, `Me/`, `Courses/`, …), `Result`/`Error`, `Validator`, DTOs in `Contracts/`, abstractions (`IAppDbContext`, `ITokenService`, …) | Domain, EF Core abstractions |
 | `Hobber.Infrastructure` | `JwtTokenService`, `IdentityPasswordHasher`, `LoggingEmailSender`, `SystemClock`, `SocialIdentityVerifier` (Google ID tokens via `Google.Apis.Auth`, Facebook via Graph API) | Application |
-| `Hobber.Persistance` | `HobberDbContext` (implements `IAppDbContext`), `Configurations/`, `Migrations/`, `Seeding/DevSeeder` | Domain, Application |
+| `Hobber.Persistance` | `HobberDbContext` (implements `IAppDbContext`), `Configurations/`, `Migrations/`, `Seeding/SeedData` (HasData, fixed ids; emitted into the migrations) | Domain, Application |
 | `Hobber.API` | Controllers, `Infrastructure/CurrentUser`, `ResultExtensions` (Result → RFC 7807), `Program.cs` | all of the above |
 | `Hobber.Tests` | xUnit integration tests via `HobberApiFactory` (SQLite in-memory + `DevSeeder`), one fixture per test class | API |
 
@@ -23,11 +23,13 @@ Dependency direction: API -> Application -> Domain. Persistance and Infrastructu
 
 ```
 dotnet build Hobber.sln                       # green, 0 warnings
-dotnet test Hobber.sln                        # 28 integration tests, ~3 s
+dotnet test Hobber.sln                        # 29 integration tests, ~3 s
 dotnet run --project Hobber.API               # https://localhost:51014 , http://localhost:51015
-                                               # Development: migrates + seeds LocalDB, Swagger UI at /swagger
+                                               # Development: applies migrations (which carry the seed data), Swagger UI at /swagger
 dotnet ef migrations add <Name> -p Hobber.Persistance -s Hobber.API -o Migrations
 dotnet ef database update -p Hobber.Persistance -s Hobber.API
+dotnet ef database drop -f -p Hobber.Persistance -s Hobber.API   # reset the local database, then update again
+sqlcmd -S "(localdb)\MSSQLLocalDB" -d HobberDb -Q "SELECT COUNT(*) FROM Courses"
 # export the contract after endpoint changes (app running):
 curl -s http://localhost:51015/swagger/v1/swagger.json -o ../docs/api/openapi.json
 ```
@@ -38,9 +40,9 @@ Database for development is **SQL Server LocalDB**, instance `MSSQLLocalDB`. The
 Server=(localdb)\MSSQLLocalDB;Database=HobberDb;Trusted_Connection=True;TrustServerCertificate=True;
 ```
 
-Configuration keys: `Jwt:{Issuer,Audience,Key,AccessTokenMinutes,RefreshTokenDays}` (dev key in `appsettings.Development.json`; production must set `Jwt__Key` with 32+ bytes or startup throws), `Database:MigrateAndSeedOnStartup` (true only in Development), `Authentication:{Google:{ClientIds[]},Facebook:{AppId,AppSecret}}` for social login. Social values are secrets: `dotnet user-secrets set ...` in `Hobber.API` (see `../docs/api/endpoints.md`), never appsettings. Tests swap `ISocialIdentityVerifier` for `FakeSocialIdentityVerifier`.
+Configuration keys: `Jwt:{Issuer,Audience,Key,AccessTokenMinutes,RefreshTokenDays}` (dev key in `appsettings.Development.json`; production must set `Jwt__Key` with 32+ bytes or startup throws), `Database:MigrateOnStartup` (true only in Development), `Authentication:{Google:{ClientIds[]},Facebook:{AppId,AppSecret}}` for social login. Social values are secrets: `dotnet user-secrets set ...` in `Hobber.API` (see `../docs/api/endpoints.md`), never appsettings. Tests swap `ISocialIdentityVerifier` for `FakeSocialIdentityVerifier`.
 
-Demo logins after seeding: `salome@hobber.dev` (student) and `ana@hobber.dev` (tutor), password `Hobber123`.
+Demo logins (seeded by the migrations): `salome@hobber.dev` (student) and `ana@hobber.dev` (tutor), password `Hobber123`. Changing seed rows = edit `SeedData.cs` and add a migration; HasData diffs by primary key, so never reuse an id for different content.
 
 ## Conventions in this code base
 
@@ -60,7 +62,7 @@ Demo logins after seeding: `salome@hobber.dev` (student) and `ana@hobber.dev` (t
 - Every endpoint ships with request validation, an integration test for the success path and each documented error, and a unit test for any domain rule it touches.
 - The served Swagger document must match `../docs/api/openapi.yaml`; a test diffs them in CI once the contract exists.
 - An EF migration accompanies every schema change; confirm `dotnet ef database update` works on LocalDB.
-- Dev-only seed data (categories, interests, a few tutors and courses) so Frontend and QA have realistic data.
+- Seed data lives in `SeedData` (HasData) and therefore in migrations; the tests rely on it too.
 - When a task is done, append to `../docs/status/backend.md`: date, task, endpoints, how to verify (commands, sample requests), notes for Frontend and QA.
 
 ## History
@@ -72,3 +74,4 @@ Demo logins after seeding: `salome@hobber.dev` (student) and `ana@hobber.dev` (t
 | 2026-10-19 | Identity, onboarding and discovery API: 9 entities, 17 endpoints, migration, seeder, 22 tests, CI. Branch `feat/2-identity-discovery-api`, PR opened. |
 | 2026-10-20 | Renamed TeachMe → Hobber (solution, projects, namespaces, DbContext, CI); GitHub repo renamed `hobber-backend`. Build-check rule added after a stray API process caused `MSB3027` lock errors. |
 | 2026-10-20 | Google/Facebook login: `ExternalLogin`, `POST /api/auth/social`, `GET /api/auth/providers`, user secrets for credentials, 6 tests. |
+| 2026-10-20 | Seed data moved from a runtime seeder into HasData + migration `SeedDemoData`; LocalDB recreated from migrations. |

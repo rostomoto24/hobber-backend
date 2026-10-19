@@ -91,7 +91,7 @@ public sealed class AuthTests(HobberApiFactory factory) : IClassFixture<HobberAp
     {
         var client = factory.CreateClient();
 
-        var response = await client.PostAsJsonAsync("/api/auth/register", ValidRegistration(DevSeeder.DemoStudentEmail.ToUpperInvariant()));
+        var response = await client.PostAsJsonAsync("/api/auth/register", ValidRegistration(SeedData.DemoStudentEmail.ToUpperInvariant()));
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
         var problem = await response.Content.ReadFromJsonAsync<JsonElement>();
@@ -103,7 +103,7 @@ public sealed class AuthTests(HobberApiFactory factory) : IClassFixture<HobberAp
     {
         var client = factory.CreateClient();
 
-        var response = await client.PostAsJsonAsync("/api/auth/login", new { email = DevSeeder.DemoStudentEmail, password = "wrong" });
+        var response = await client.PostAsJsonAsync("/api/auth/login", new { email = SeedData.DemoStudentEmail, password = "wrong" });
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         var problem = await response.Content.ReadFromJsonAsync<JsonElement>();
@@ -114,7 +114,7 @@ public sealed class AuthTests(HobberApiFactory factory) : IClassFixture<HobberAp
     public async Task Refresh_rotates_token_and_rejects_the_old_one()
     {
         var client = factory.CreateClient();
-        var login = await (await client.PostAsJsonAsync("/api/auth/login", new { email = DevSeeder.DemoTutorEmail, password = DevSeeder.DemoPassword }))
+        var login = await (await client.PostAsJsonAsync("/api/auth/login", new { email = SeedData.DemoTutorEmail, password = SeedData.DemoPassword }))
             .Content.ReadFromJsonAsync<AuthResponse>();
 
         var first = await client.PostAsJsonAsync("/api/auth/refresh", new { refreshToken = login!.RefreshToken });

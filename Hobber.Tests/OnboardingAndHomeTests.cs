@@ -1,8 +1,8 @@
 using System.Net;
 using System.Net.Http.Json;
-using System.Text.Json;
 using Hobber.Application.Common;
 using Hobber.Application.Contracts;
+using Hobber.Domain.Entities;
 using Hobber.Persistance.Seeding;
 
 namespace Hobber.Tests;
@@ -53,7 +53,7 @@ public sealed class OnboardingAndHomeTests(HobberApiFactory factory) : IClassFix
     [Fact]
     public async Task Me_returns_greeting_data_for_the_demo_student()
     {
-        var client = await factory.CreateClientAsAsync(DevSeeder.DemoStudentEmail);
+        var client = await factory.CreateClientAsAsync(SeedData.DemoStudentEmail);
 
         var me = await client.GetFromJsonAsync<UserDto>("/api/me");
 
@@ -65,7 +65,7 @@ public sealed class OnboardingAndHomeTests(HobberApiFactory factory) : IClassFix
     [Fact]
     public async Task For_you_only_contains_interest_categories_with_free_seats_not_enrolled()
     {
-        var client = await factory.CreateClientAsAsync(DevSeeder.DemoStudentEmail);
+        var client = await factory.CreateClientAsAsync(SeedData.DemoStudentEmail);
         var me = (await client.GetFromJsonAsync<UserDto>("/api/me"))!;
         var interestIds = me.Interests.Select(i => i.Id).ToHashSet();
 
@@ -79,19 +79,42 @@ public sealed class OnboardingAndHomeTests(HobberApiFactory factory) : IClassFix
     }
 
     [Fact]
-    public async Task Last_call_contains_nearly_full_and_starting_soon_courses_with_a_seat_left()
+    public async Task Last_call_contains_nearly_full_courses_with_a_seat_left()
     {
         var client = factory.CreateClient();
 
-        var page = (await client.GetFromJsonAsync<PagedResult<CourseSummaryDto>>("/api/courses?section=lastCall"))!;
+        var page = (await client.GetFromJsonAsync<PagedResult<CourseSummaryDto>>("/api/courses?section=lastCall&pageSize=50"))!;
 
         var titles = page.Items.Select(c => c.Title).ToList();
         Assert.Contains("Pilates for beginners", titles);   // 19/20
         Assert.Contains("Cooking - Advanced", titles);      // 19/20
-        Assert.Contains("Padel for beginners", titles);     // starts in 2 days
-        Assert.DoesNotContain("Street photography walk", titles); // 0/25, starts in 40 days
+        Assert.Contains("Padel for beginners", titles);     // 11/12
+        Assert.Contains("Pilates 101", titles);             // 14/15
+        Assert.DoesNotContain("Knitting for beginners", titles); // 5/20, no session this week
         Assert.All(page.Items, c => Assert.True(c.EnrolledCount < c.Capacity));
-        Assert.Equal("Pilates for beginners", titles[0]);
+    }
+
+    [Fact]
+    public async Task Last_call_also_contains_a_course_whose_session_starts_within_seven_days()
+    {
+        var client = factory.CreateClient();
+        var ceramic = SeedData.CourseId(8); // 3/10, far from full
+        using (var db = factory.CreateDbContext())
+        {
+            db.CourseSessions.Add(new CourseSession
+            {
+                Id = Guid.NewGuid(),
+                CourseId = ceramic,
+                StartsAt = DateTime.UtcNow.AddDays(2),
+                EndsAt = DateTime.UtcNow.AddDays(2).AddMinutes(90),
+            });
+            db.SaveChanges();
+        }
+
+        var page = (await client.GetFromJsonAsync<PagedResult<CourseSummaryDto>>("/api/courses?section=lastCall&pageSize=50"))!;
+
+        var ceramicCard = Assert.Single(page.Items, c => c.Id == ceramic);
+        Assert.NotNull(ceramicCard.NextSessionAt);
     }
 
     [Fact]
@@ -106,7 +129,7 @@ public sealed class OnboardingAndHomeTests(HobberApiFactory factory) : IClassFix
         Assert.True(page.HasMore);
         Assert.True(page.TotalCount >= 9);
         Assert.Equal(page.Items.OrderByDescending(c => c.EnrolledCount).Select(c => c.Id), page.Items.Select(c => c.Id));
-        Assert.Equal(110, page.Items[0].EnrolledCount);
+        Assert.Equal(19, page.Items[0].EnrolledCount);
     }
 
     [Fact]
@@ -127,17 +150,16 @@ public sealed class OnboardingAndHomeTests(HobberApiFactory factory) : IClassFix
     public async Task Course_details_include_sessions_and_enrol_eligibility()
     {
         var anonymous = factory.CreateClient();
-        var all = (await anonymous.GetFromJsonAsync<PagedResult<CourseSummaryDto>>("/api/courses?pageSize=50"))!;
-        var knitting = all.Items.First(c => c.Title == "Knitting for beginners");
+        var knitting = SeedData.CourseId(1);
 
-        var asAnonymous = (await anonymous.GetFromJsonAsync<CourseDetailsDto>($"/api/courses/{knitting.Id}"))!;
-        Assert.Equal(4, asAnonymous.Sessions.Count);
+        var asAnonymous = (await anonymous.GetFromJsonAsync<CourseDetailsDto>($"/api/courses/{knitting}"))!;
+        Assert.Equal(12, asAnonymous.Sessions.Count);
         Assert.False(asAnonymous.CanEnroll);
         Assert.Equal("Offline", asAnonymous.Format);
         Assert.NotNull(asAnonymous.Location);
 
-        var student = await factory.CreateClientAsAsync(DevSeeder.DemoStudentEmail);
-        var asStudent = (await student.GetFromJsonAsync<CourseDetailsDto>($"/api/courses/{knitting.Id}"))!;
+        var student = await factory.CreateClientAsAsync(SeedData.DemoStudentEmail);
+        var asStudent = (await student.GetFromJsonAsync<CourseDetailsDto>($"/api/courses/{knitting}"))!;
         Assert.True(asStudent.CanEnroll);
         Assert.False(asStudent.IsEnrolled);
 
@@ -163,7 +185,7 @@ public sealed class OnboardingAndHomeTests(HobberApiFactory factory) : IClassFix
     [Fact]
     public async Task Unread_count_reflects_seeded_notification()
     {
-        var client = await factory.CreateClientAsAsync(DevSeeder.DemoStudentEmail);
+        var client = await factory.CreateClientAsAsync(SeedData.DemoStudentEmail);
 
         var count = await client.GetFromJsonAsync<UnreadCountDto>("/api/notifications/unread-count");
 

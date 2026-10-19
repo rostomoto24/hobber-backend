@@ -45,6 +45,64 @@ namespace Hobber.Persistance.Migrations
                         .IsUnique();
 
                     b.ToTable("Categories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000001"),
+                            Accent = 1,
+                            DisplayOrder = 1,
+                            Name = "Pilates"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000002"),
+                            Accent = 2,
+                            DisplayOrder = 2,
+                            Name = "Leather crafts"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000003"),
+                            Accent = 3,
+                            DisplayOrder = 3,
+                            Name = "Drawing and painting"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000004"),
+                            Accent = 4,
+                            DisplayOrder = 4,
+                            Name = "Knitting"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000005"),
+                            Accent = 1,
+                            DisplayOrder = 5,
+                            Name = "Ceramic"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000006"),
+                            Accent = 3,
+                            DisplayOrder = 6,
+                            Name = "Cooking"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000007"),
+                            Accent = 2,
+                            DisplayOrder = 7,
+                            Name = "Padel"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000008"),
+                            Accent = 4,
+                            DisplayOrder = 8,
+                            Name = "Photography"
+                        });
                 });
 
             modelBuilder.Entity("Hobber.Domain.Entities.Course", b =>
@@ -96,6 +154,133 @@ namespace Hobber.Persistance.Migrations
                     b.HasIndex("TutorId");
 
                     b.ToTable("Courses", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000001"),
+                            Capacity = 20,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 30, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Knitting for beginners: a friendly course for anyone curious about knitting. Materials included.",
+                            Format = 2,
+                            ImageUrl = "https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=600",
+                            Location = "Tbilisi, Vake",
+                            Price = 0m,
+                            Title = "Knitting for beginners",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000002"),
+                            Capacity = 15,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2026, 10, 28, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Pilates 101: a friendly course for anyone curious about pilates. Materials included.",
+                            Format = 1,
+                            ImageUrl = "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600",
+                            Price = 0m,
+                            Title = "Pilates 101",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000003"),
+                            Capacity = 15,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000003"),
+                            CreatedAt = new DateTime(2026, 10, 31, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Watercolour basics: a friendly course for anyone curious about drawing and painting. Materials included.",
+                            Format = 2,
+                            ImageUrl = "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600",
+                            Location = "Tbilisi, Vake",
+                            Price = 25m,
+                            Title = "Watercolour basics",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000004"),
+                            Capacity = 20,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2026, 10, 13, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Pilates for beginners: a friendly course for anyone curious about pilates. Materials included.",
+                            Format = 2,
+                            ImageUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600",
+                            Location = "Tbilisi, Vake",
+                            Price = 0m,
+                            Title = "Pilates for beginners",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000005"),
+                            Capacity = 12,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000007"),
+                            CreatedAt = new DateTime(2026, 10, 8, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Padel for beginners: a friendly course for anyone curious about padel. Materials included.",
+                            Format = 2,
+                            ImageUrl = "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600",
+                            Location = "Tbilisi, Vake",
+                            Price = 10m,
+                            Title = "Padel for beginners",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000006"),
+                            Capacity = 20,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 9, 23, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Cooking - Advanced: a friendly course for anyone curious about cooking. Materials included.",
+                            Format = 2,
+                            ImageUrl = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600",
+                            Location = "Tbilisi, Vake",
+                            Price = 40m,
+                            Title = "Cooking - Advanced",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000007"),
+                            Capacity = 12,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 21, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Leather wallet workshop: a friendly course for anyone curious about leather crafts. Materials included.",
+                            Format = 2,
+                            ImageUrl = "https://images.unsplash.com/photo-1473188588951-666fce8e7c68?w=600",
+                            Location = "Tbilisi, Vake",
+                            Price = 35m,
+                            Title = "Leather wallet workshop",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000008"),
+                            Capacity = 10,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 25, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Ceramic bowls: a friendly course for anyone curious about ceramic. Materials included.",
+                            Format = 2,
+                            ImageUrl = "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600",
+                            Location = "Tbilisi, Vake",
+                            Price = 30m,
+                            Title = "Ceramic bowls",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000009"),
+                            Capacity = 25,
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000008"),
+                            CreatedAt = new DateTime(2026, 11, 1, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Street photography walk: a friendly course for anyone curious about photography. Materials included.",
+                            Format = 2,
+                            ImageUrl = "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600",
+                            Location = "Tbilisi, Vake",
+                            Price = 15m,
+                            Title = "Street photography walk",
+                            TutorId = new Guid("20000000-0000-0000-0000-000000000003")
+                        });
                 });
 
             modelBuilder.Entity("Hobber.Domain.Entities.CourseSession", b =>
@@ -120,6 +305,764 @@ namespace Hobber.Persistance.Migrations
                     b.HasIndex("StartsAt");
 
                     b.ToTable("CourseSessions", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2026, 11, 16, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 16, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2026, 11, 23, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 23, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2026, 11, 30, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 30, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2026, 12, 7, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 7, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2026, 12, 14, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 14, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2026, 12, 21, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 21, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2026, 12, 28, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 28, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2027, 1, 4, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 4, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2027, 1, 11, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 11, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2027, 1, 18, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 18, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2027, 1, 25, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 25, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0001-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            EndsAt = new DateTime(2027, 2, 1, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 1, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2026, 11, 23, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 23, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2026, 11, 30, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 30, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2026, 12, 7, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 7, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2026, 12, 14, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 14, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2026, 12, 21, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 21, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2026, 12, 28, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 28, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2027, 1, 4, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 4, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2027, 1, 11, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 11, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2027, 1, 18, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 18, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2027, 1, 25, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 25, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2027, 2, 1, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 1, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0002-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            EndsAt = new DateTime(2027, 2, 8, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 8, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2026, 11, 12, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 12, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2026, 11, 19, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 19, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2026, 11, 26, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 26, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2026, 12, 3, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 3, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2026, 12, 10, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 10, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2026, 12, 17, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 17, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2026, 12, 24, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 24, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2026, 12, 31, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 31, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2027, 1, 7, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 7, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2027, 1, 14, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 14, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2027, 1, 21, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 21, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0003-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            EndsAt = new DateTime(2027, 1, 28, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 28, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 11, 5, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 5, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 11, 12, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 12, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 11, 19, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 19, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 11, 26, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 26, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 12, 3, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 3, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 12, 10, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 10, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 12, 17, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 17, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 12, 24, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 24, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2026, 12, 31, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 31, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2027, 1, 7, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 7, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2027, 1, 14, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 14, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0004-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            EndsAt = new DateTime(2027, 1, 21, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 21, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 11, 4, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 4, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 11, 11, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 11, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 11, 18, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 18, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 11, 25, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 25, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 12, 2, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 2, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 12, 9, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 9, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 12, 16, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 16, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 12, 23, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 23, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2026, 12, 30, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 30, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2027, 1, 6, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 6, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2027, 1, 13, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 13, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0005-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            EndsAt = new DateTime(2027, 1, 20, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 20, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2026, 12, 2, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 2, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2026, 12, 9, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 9, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2026, 12, 16, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 16, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2026, 12, 23, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 23, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2026, 12, 30, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 30, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2027, 1, 6, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 6, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2027, 1, 13, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 13, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2027, 1, 20, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 20, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2027, 1, 27, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 27, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2027, 2, 3, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 3, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2027, 2, 10, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 10, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0006-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            EndsAt = new DateTime(2027, 2, 17, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 17, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2026, 11, 20, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 20, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2026, 11, 27, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 27, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2026, 12, 4, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 4, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2026, 12, 11, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 11, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2026, 12, 18, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 18, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2026, 12, 25, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 25, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2027, 1, 1, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 1, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2027, 1, 8, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 8, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2027, 1, 15, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 15, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2027, 1, 22, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 22, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2027, 1, 29, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 29, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0007-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            EndsAt = new DateTime(2027, 2, 5, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 5, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2026, 11, 27, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 11, 27, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2026, 12, 4, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 4, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2026, 12, 11, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 11, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2026, 12, 18, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 18, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2026, 12, 25, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2026, 12, 25, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2027, 1, 1, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 1, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2027, 1, 8, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 8, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2027, 1, 15, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 15, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2027, 1, 22, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 22, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2027, 1, 29, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 29, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2027, 2, 5, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 5, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0008-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            EndsAt = new DateTime(2027, 2, 12, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 12, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 1, 11, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 11, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 1, 18, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 18, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 1, 25, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 1, 25, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 2, 1, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 1, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 2, 8, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 8, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 2, 15, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 15, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 2, 22, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 2, 22, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 3, 1, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 3, 1, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 3, 8, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 3, 8, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 3, 15, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 3, 15, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 3, 22, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 3, 22, 18, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("40000000-0000-0000-0009-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000009"),
+                            EndsAt = new DateTime(2027, 3, 29, 19, 30, 0, 0, DateTimeKind.Utc),
+                            StartsAt = new DateTime(2027, 3, 29, 18, 0, 0, 0, DateTimeKind.Utc)
+                        });
                 });
 
             modelBuilder.Entity("Hobber.Domain.Entities.Enrollment", b =>
@@ -145,6 +1088,582 @@ namespace Hobber.Persistance.Migrations
                         .IsUnique();
 
                     b.ToTable("Enrollments", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0001-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000101")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0001-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000102")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0001-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000103")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0001-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000104")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0001-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000105")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000101")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000102")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000103")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000104")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000105")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000106")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000107")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000108")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000109")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000110")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000111")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000112")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000013"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000113")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0002-000000000014"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000002"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000114")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0003-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000101")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0003-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000102")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0003-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000103")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0003-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000003"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000104")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000101")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000102")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000103")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000104")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000105")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000106")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000107")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000108")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000109")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000110")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000111")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000112")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000013"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000113")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000014"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000114")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000015"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000115")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000016"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000116")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000017"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000117")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000018"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000118")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0004-000000000019"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000004"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000119")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000101")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000102")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000103")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000104")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000105")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000106")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000107")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000108")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000109")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000110")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0005-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000005"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000111")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000101")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000102")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000103")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000104")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000105")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000106")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000107")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000008"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000108")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000009"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000109")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000010"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000110")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000011"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000111")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000012"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000112")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000013"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000113")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000014"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000114")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000015"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000115")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000016"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000116")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000017"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000117")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000018"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000118")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0006-000000000019"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000006"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000119")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0007-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000101")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0007-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000102")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0007-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000103")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0007-000000000004"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000104")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0007-000000000005"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000105")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0007-000000000006"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000106")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0007-000000000007"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000007"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000107")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0008-000000000001"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000101")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0008-000000000002"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000102")
+                        },
+                        new
+                        {
+                            Id = new Guid("50000000-0000-0000-0008-000000000003"),
+                            CourseId = new Guid("30000000-0000-0000-0000-000000000008"),
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            StudentId = new Guid("20000000-0000-0000-0000-000000000103")
+                        });
                 });
 
             modelBuilder.Entity("Hobber.Domain.Entities.ExternalLogin", b =>
@@ -208,6 +1727,16 @@ namespace Hobber.Persistance.Migrations
                     b.HasIndex("UserId", "ReadAt");
 
                     b.ToTable("Notifications", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("60000000-0000-0000-0000-000000000001"),
+                            Body = "Pick your interests to get recommendations.",
+                            CreatedAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Title = "Welcome to Hobber",
+                            UserId = new Guid("20000000-0000-0000-0000-000000000004")
+                        });
                 });
 
             modelBuilder.Entity("Hobber.Domain.Entities.PasswordResetToken", b =>
@@ -322,6 +1851,297 @@ namespace Hobber.Persistance.Migrations
                         .IsUnique();
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000001"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "ana@hobber.dev",
+                            FirstName = "Ana",
+                            LastName = "Sarajishvili",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000002"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "mariam.j@hobber.dev",
+                            FirstName = "Mariam",
+                            LastName = "Jabashvili",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000003"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "mariam.p@hobber.dev",
+                            FirstName = "Mariam",
+                            LastName = "Parulava",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000004"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            AvatarUrl = "https://i.pravatar.cc/96?img=47",
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "salome@hobber.dev",
+                            FirstName = "Salome",
+                            LastName = "Beridze",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000101"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student1@hobber.dev",
+                            FirstName = "Student1",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000102"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student2@hobber.dev",
+                            FirstName = "Student2",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000103"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student3@hobber.dev",
+                            FirstName = "Student3",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000104"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student4@hobber.dev",
+                            FirstName = "Student4",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000105"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student5@hobber.dev",
+                            FirstName = "Student5",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000106"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student6@hobber.dev",
+                            FirstName = "Student6",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000107"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student7@hobber.dev",
+                            FirstName = "Student7",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000108"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student8@hobber.dev",
+                            FirstName = "Student8",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000109"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student9@hobber.dev",
+                            FirstName = "Student9",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000110"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student10@hobber.dev",
+                            FirstName = "Student10",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000111"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student11@hobber.dev",
+                            FirstName = "Student11",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000112"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student12@hobber.dev",
+                            FirstName = "Student12",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000113"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student13@hobber.dev",
+                            FirstName = "Student13",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000114"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student14@hobber.dev",
+                            FirstName = "Student14",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000115"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student15@hobber.dev",
+                            FirstName = "Student15",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000116"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student16@hobber.dev",
+                            FirstName = "Student16",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000117"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student17@hobber.dev",
+                            FirstName = "Student17",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000118"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student18@hobber.dev",
+                            FirstName = "Student18",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000119"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student19@hobber.dev",
+                            FirstName = "Student19",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("20000000-0000-0000-0000-000000000120"),
+                            AcceptedTermsAt = new DateTime(2026, 10, 20, 12, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2026, 8, 21, 12, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "student20@hobber.dev",
+                            FirstName = "Student20",
+                            LastName = "Demo",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmny6tiZnucsMEUjp6RN/IPb4RMYUUn70HlTmC1FU9U3pNSaTa4OFSSE5TEFn5SMg==",
+                            Phone = "+995 555 000 000",
+                            ProfileType = 1
+                        });
                 });
 
             modelBuilder.Entity("Hobber.Domain.Entities.UserInterest", b =>
@@ -337,6 +2157,23 @@ namespace Hobber.Persistance.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("UserInterests", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("20000000-0000-0000-0000-000000000004"),
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000004")
+                        },
+                        new
+                        {
+                            UserId = new Guid("20000000-0000-0000-0000-000000000004"),
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            UserId = new Guid("20000000-0000-0000-0000-000000000004"),
+                            CategoryId = new Guid("10000000-0000-0000-0000-000000000003")
+                        });
                 });
 
             modelBuilder.Entity("Hobber.Domain.Entities.Course", b =>

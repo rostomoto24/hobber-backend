@@ -10,77 +10,72 @@ namespace Hobber.Tests;
 
 public sealed class EnrollmentTests(HobberApiFactory factory) : IClassFixture<HobberApiFactory>
 {
-    private async Task<CourseSummaryDto> FindAsync(HttpClient client, string title)
-    {
-        var all = (await client.GetFromJsonAsync<PagedResult<CourseSummaryDto>>("/api/courses?pageSize=50"))!;
-        return all.Items.First(c => c.Title == title);
-    }
-
     private static async Task<string> CodeOf(HttpResponseMessage response) =>
         (await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString()!;
 
     [Fact]
     public async Task Student_enrols_once_appears_in_my_courses_and_can_leave()
     {
-        var client = await factory.CreateClientAsAsync(DevSeeder.DemoStudentEmail);
-        var course = await FindAsync(client, "Ceramic bowls");
+        var client = await factory.CreateClientAsAsync(SeedData.DemoStudentEmail);
+        var course = SeedData.CourseId(8); // Ceramic bowls, 3/10
+        var before = (await client.GetFromJsonAsync<CourseDetailsDto>($"/api/courses/{course}"))!;
 
-        var enrol = await client.PostAsync($"/api/courses/{course.Id}/enrollments", null);
+        var enrol = await client.PostAsync($"/api/courses/{course}/enrollments", null);
         Assert.Equal(HttpStatusCode.NoContent, enrol.StatusCode);
 
-        var again = await client.PostAsync($"/api/courses/{course.Id}/enrollments", null);
+        var again = await client.PostAsync($"/api/courses/{course}/enrollments", null);
         Assert.Equal(HttpStatusCode.Conflict, again.StatusCode);
         Assert.Equal("already_enrolled", await CodeOf(again));
 
         var mine = (await client.GetFromJsonAsync<List<CourseSummaryDto>>("/api/me/courses"))!;
-        Assert.Contains(mine, c => c.Id == course.Id);
+        Assert.Contains(mine, c => c.Id == course);
 
-        var details = (await client.GetFromJsonAsync<CourseDetailsDto>($"/api/courses/{course.Id}"))!;
+        var details = (await client.GetFromJsonAsync<CourseDetailsDto>($"/api/courses/{course}"))!;
         Assert.True(details.IsEnrolled);
         Assert.False(details.CanEnroll);
-        Assert.Equal(course.EnrolledCount + 1, details.EnrolledCount);
+        Assert.Equal(before.EnrolledCount + 1, details.EnrolledCount);
 
         var forYou = (await client.GetFromJsonAsync<PagedResult<CourseSummaryDto>>("/api/courses?section=forYou&pageSize=50"))!;
-        Assert.DoesNotContain(forYou.Items, c => c.Id == course.Id);
+        Assert.DoesNotContain(forYou.Items, c => c.Id == course);
 
-        var leave = await client.DeleteAsync($"/api/courses/{course.Id}/enrollments/me");
+        var leave = await client.DeleteAsync($"/api/courses/{course}/enrollments/me");
         Assert.Equal(HttpStatusCode.NoContent, leave.StatusCode);
-        var leaveAgain = await client.DeleteAsync($"/api/courses/{course.Id}/enrollments/me");
+        var leaveAgain = await client.DeleteAsync($"/api/courses/{course}/enrollments/me");
         Assert.Equal(HttpStatusCode.NotFound, leaveAgain.StatusCode);
     }
 
     [Fact]
     public async Task Full_course_rejects_enrolment()
     {
-        var client = await factory.CreateClientAsAsync(DevSeeder.DemoStudentEmail);
-        var course = await FindAsync(client, "Pilates for beginners"); // seeded 19/20
+        var client = await factory.CreateClientAsAsync(SeedData.DemoStudentEmail);
+        var course = SeedData.CourseId(4); // Pilates for beginners, seeded 19/20
 
         using (var db = factory.CreateDbContext())
         {
-            var filler = db.Users.First(u => u.Email == "student149@hobber.dev");
-            if (!db.Enrollments.Any(e => e.CourseId == course.Id && e.StudentId == filler.Id))
+            var filler = SeedData.FillerStudentId(SeedData.FillerStudentCount); // not among the 19 enrolled
+            if (!db.Enrollments.Any(e => e.CourseId == course && e.StudentId == filler))
             {
-                db.Enrollments.Add(new Enrollment { Id = Guid.NewGuid(), CourseId = course.Id, StudentId = filler.Id, CreatedAt = DateTime.UtcNow });
+                db.Enrollments.Add(new Enrollment { Id = Guid.NewGuid(), CourseId = course, StudentId = filler, CreatedAt = DateTime.UtcNow });
                 db.SaveChanges();
             }
         }
 
-        var response = await client.PostAsync($"/api/courses/{course.Id}/enrollments", null);
+        var response = await client.PostAsync($"/api/courses/{course}/enrollments", null);
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
         Assert.Equal("course_full", await CodeOf(response));
 
         var lastCall = (await client.GetFromJsonAsync<PagedResult<CourseSummaryDto>>("/api/courses?section=lastCall&pageSize=50"))!;
-        Assert.DoesNotContain(lastCall.Items, c => c.Id == course.Id);
+        Assert.DoesNotContain(lastCall.Items, c => c.Id == course);
     }
 
     [Fact]
     public async Task Tutor_cannot_enrol_and_sees_own_courses_in_my_courses()
     {
-        var client = await factory.CreateClientAsAsync(DevTutor());
-        var course = await FindAsync(client, "Street photography walk");
+        var client = await factory.CreateClientAsAsync(SeedData.DemoTutorEmail);
+        var course = SeedData.CourseId(9); // Street photography walk, by another tutor
 
-        var response = await client.PostAsync($"/api/courses/{course.Id}/enrollments", null);
+        var response = await client.PostAsync($"/api/courses/{course}/enrollments", null);
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
         Assert.Equal("students_only", await CodeOf(response));
 
@@ -92,12 +87,10 @@ public sealed class EnrollmentTests(HobberApiFactory factory) : IClassFixture<Ho
     [Fact]
     public async Task Enrolling_in_an_unknown_course_is_not_found()
     {
-        var client = await factory.CreateClientAsAsync(DevSeeder.DemoStudentEmail);
+        var client = await factory.CreateClientAsAsync(SeedData.DemoStudentEmail);
 
         var response = await client.PostAsync($"/api/courses/{Guid.NewGuid()}/enrollments", null);
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
-
-    private static string DevTutor() => DevSeeder.DemoTutorEmail;
 }

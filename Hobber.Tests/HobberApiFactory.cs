@@ -1,5 +1,9 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using Hobber.Application.Abstractions;
+using Hobber.Application.Contracts;
+using Hobber.Persistance.Contexts;
+using Hobber.Persistance.Seeding;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -7,27 +11,22 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Hobber.Application.Abstractions;
-using Hobber.Application.Contracts;
-using Hobber.Persistance.Contexts;
-using Hobber.Persistance.Seeding;
 
 namespace Hobber.Tests;
 
 /// <summary>
-/// Boots the real API against an in-memory SQLite database seeded with <see cref="DevSeeder"/>.
+/// Boots the real API against an in-memory SQLite database. <c>EnsureCreated</c> inserts the
+/// <see cref="SeedData"/> rows (the same HasData the migrations carry), so tests see the demo content.
 /// One database per factory instance; each test class gets its own through IClassFixture.
 /// </summary>
 public sealed class HobberApiFactory : WebApplicationFactory<Program>
 {
     private readonly SqliteConnection _connection = new("DataSource=:memory:");
 
-    public static readonly DateTime SeedNow = new(2026, 10, 19, 12, 0, 0, DateTimeKind.Utc);
-
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Development");
-        builder.UseSetting("Database:MigrateAndSeedOnStartup", "false");
+        builder.UseSetting("Database:MigrateOnStartup", "false");
 
         builder.ConfigureTestServices(services =>
         {
@@ -42,13 +41,11 @@ public sealed class HobberApiFactory : WebApplicationFactory<Program>
 
             using var provider = services.BuildServiceProvider();
             using var scope = provider.CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<HobberDbContext>();
-            db.Database.EnsureCreated();
-            DevSeeder.SeedAsync(db, scope.ServiceProvider.GetRequiredService<IPasswordHasher>(), SeedNow).GetAwaiter().GetResult();
+            scope.ServiceProvider.GetRequiredService<HobberDbContext>().Database.EnsureCreated();
         });
     }
 
-    public async Task<HttpClient> CreateClientAsAsync(string email, string password = DevSeeder.DemoPassword)
+    public async Task<HttpClient> CreateClientAsAsync(string email, string password = SeedData.DemoPassword)
     {
         var client = CreateClient();
         var response = await client.PostAsJsonAsync("/api/auth/login", new { email, password });

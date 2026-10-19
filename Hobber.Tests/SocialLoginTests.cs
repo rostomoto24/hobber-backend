@@ -56,7 +56,7 @@ public sealed class SocialLoginTests(HobberApiFactory factory) : IClassFixture<H
     {
         var client = factory.CreateClient();
 
-        var response = await client.PostAsJsonAsync("/api/auth/social", new { provider = "facebook", token = $"facebook:fb-9:{DevSeeder.DemoStudentEmail}" });
+        var response = await client.PostAsJsonAsync("/api/auth/social", new { provider = "facebook", token = $"facebook:fb-9:{SeedData.DemoStudentEmail}" });
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var auth = (await response.Content.ReadFromJsonAsync<AuthResponse>())!;
@@ -69,7 +69,7 @@ public sealed class SocialLoginTests(HobberApiFactory factory) : IClassFixture<H
     {
         var client = factory.CreateClient();
 
-        var response = await client.PostAsJsonAsync("/api/auth/social", new { provider = "google", token = $"google:sub-7:{DevSeeder.DemoTutorEmail}:unverified" });
+        var response = await client.PostAsJsonAsync("/api/auth/social", new { provider = "google", token = $"google:sub-7:{SeedData.DemoTutorEmail}:unverified" });
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
         Assert.Equal("email_in_use", await CodeOf(response));

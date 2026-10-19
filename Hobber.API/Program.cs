@@ -1,9 +1,5 @@
 using System.Text;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Hobber.API.Infrastructure;
 using Hobber.Application;
 using Hobber.Application.Abstractions;
@@ -11,7 +7,10 @@ using Hobber.Infrastructure;
 using Hobber.Infrastructure.Auth;
 using Hobber.Persistance;
 using Hobber.Persistance.Contexts;
-using Hobber.Persistance.Seeding;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,12 +85,12 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-if (app.Configuration.GetValue<bool>("Database:MigrateAndSeedOnStartup"))
+// Development convenience: bring the local database up to date (migrations carry the seed data).
+if (app.Configuration.GetValue<bool>("Database:MigrateOnStartup"))
 {
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<HobberDbContext>();
     await db.Database.MigrateAsync();
-    await DevSeeder.SeedAsync(db, scope.ServiceProvider.GetRequiredService<IPasswordHasher>(), DateTime.UtcNow);
 }
 
 if (app.Environment.IsDevelopment())
