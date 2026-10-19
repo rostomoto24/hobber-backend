@@ -1,6 +1,7 @@
 namespace Hobber.Application.Contracts;
 
-public sealed record CategoryDto(Guid Id, string Name, string Accent, int DisplayOrder);
+/// <summary><paramref name="ParentId"/> is null for a top-level category; leaves carry their parent's id.</summary>
+public sealed record CategoryDto(Guid Id, string Name, string Accent, int DisplayOrder, Guid? ParentId);
 
 public sealed record UserDto(
     Guid Id,
@@ -31,6 +32,7 @@ public sealed record CourseSummaryDto(
     string TutorName,
     CategoryDto Category,
     string Format,
+    string Level,
     decimal Price,
     int EnrolledCount,
     int Capacity,
@@ -48,6 +50,7 @@ public sealed record CourseDetailsDto(
     string? TutorAvatarUrl,
     CategoryDto Category,
     string Format,
+    string Level,
     string? Location,
     decimal Price,
     int EnrolledCount,

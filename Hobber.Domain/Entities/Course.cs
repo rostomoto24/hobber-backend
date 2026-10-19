@@ -14,11 +14,14 @@ public sealed class Course
 
     public User? Tutor { get; set; }
 
+    /// <summary>A leaf category (subcategory), e.g. Padel under Sport.</summary>
     public Guid CategoryId { get; set; }
 
     public Category? Category { get; set; }
 
     public CourseFormat Format { get; set; }
+
+    public CourseLevel Level { get; set; }
 
     /// <summary>Required for offline courses, null for online.</summary>
     public string? Location { get; set; }

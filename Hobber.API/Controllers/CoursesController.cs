@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Hobber.API.Infrastructure;
 using Hobber.Application.Common;
 using Hobber.Application.Contracts;
 using Hobber.Application.Courses;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Hobber.API.Controllers;
 
@@ -13,9 +13,12 @@ namespace Hobber.API.Controllers;
 public sealed class CoursesController : ControllerBase
 {
     /// <summary>
-    /// Browse courses. <c>section</c> selects a Home section: <c>all</c> (default, newest first),
-    /// <c>forYou</c> (requires auth; interest categories, free seats, not enrolled), <c>lastCall</c>
-    /// (90 % full or first session within 7 days), <c>popular</c> (most enrolled).
+    /// Browse and filter courses. <c>section</c>: <c>all</c> (default, newest first), <c>forYou</c> (requires auth;
+    /// interest categories, free seats, not enrolled), <c>lastCall</c> (90 % full or first session within 7 days),
+    /// <c>popular</c> (most enrolled), <c>recommended</c> (free seats; <c>categoryIds</c> act as a ranking hint).
+    /// Filters (comma-separated): <c>categoryIds</c> (parents expand to their subcategories), <c>levels</c>
+    /// (NotApplicable, Beginner, Advanced, Professional), <c>weekdays</c> (0 = Sunday … 6, or names),
+    /// <c>timeFrom</c>/<c>timeTo</c> (HH:mm, matches a session starting in the range), <c>search</c> (title, description, category).
     /// </summary>
     [HttpGet]
     [AllowAnonymous]
@@ -25,12 +28,25 @@ public sealed class CoursesController : ControllerBase
     public async Task<IActionResult> List(
         [FromQuery] CourseSection section = CourseSection.All,
         [FromQuery] Guid? categoryId = null,
+        [FromQuery] string? categoryIds = null,
         [FromQuery] string? search = null,
+        [FromQuery] string? levels = null,
+        [FromQuery] string? weekdays = null,
+        [FromQuery] string? timeFrom = null,
+        [FromQuery] string? timeTo = null,
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10,
         [FromServices] ListCoursesHandler handler = null!,
-        CancellationToken ct = default) =>
-        (await handler.HandleAsync(new ListCoursesQuery(section, categoryId, search, page, pageSize), ct)).ToActionResult(this);
+        CancellationToken ct = default)
+    {
+        var parsed = CourseQueryParser.Parse(section, categoryId, categoryIds, search, levels, weekdays, timeFrom, timeTo, page, pageSize);
+        if (!parsed.IsSuccess)
+        {
+            return this.Problem(parsed.Error);
+        }
+
+        return (await handler.HandleAsync(parsed.Value, ct)).ToActionResult(this);
+    }
 
     /// <summary>Course details, including sessions and whether the current user can enrol.</summary>
     [HttpGet("{id:guid}")]

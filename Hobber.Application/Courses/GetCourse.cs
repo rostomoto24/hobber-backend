@@ -56,6 +56,7 @@ public sealed class GetCourseHandler(IAppDbContext db, ICurrentUser current)
             course.Tutor.AvatarUrl,
             course.Category.ToDto(),
             course.Format.ToString(),
+            course.Level.ToString(),
             course.Location,
             course.Price,
             enrolled,

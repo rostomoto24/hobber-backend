@@ -1,6 +1,6 @@
+using Hobber.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Hobber.Domain.Entities;
 
 namespace Hobber.Persistance.Configurations;
 
@@ -13,6 +13,11 @@ public sealed class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.Property(c => c.Name).HasMaxLength(100).IsRequired();
         builder.HasIndex(c => c.Name).IsUnique();
         builder.Property(c => c.Accent).HasConversion<int>().IsRequired();
+        builder.HasIndex(c => c.ParentId);
+        builder.HasOne(c => c.Parent)
+            .WithMany(c => c.Children)
+            .HasForeignKey(c => c.ParentId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
 
@@ -33,6 +38,7 @@ public sealed class CourseSessionConfiguration : IEntityTypeConfiguration<Course
         builder.ToTable("CourseSessions");
         builder.HasKey(s => s.Id);
         builder.HasIndex(s => s.StartsAt);
+        builder.HasIndex(s => new { s.DayOfWeek, s.StartMinutes });
         builder.HasOne(s => s.Course).WithMany(c => c.Sessions).HasForeignKey(s => s.CourseId).OnDelete(DeleteBehavior.Cascade);
     }
 }

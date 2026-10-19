@@ -17,9 +17,10 @@ public sealed class OnboardingAndHomeTests(HobberApiFactory factory) : IClassFix
         var categories = await client.GetFromJsonAsync<List<CategoryDto>>("/api/categories");
 
         Assert.NotNull(categories);
-        Assert.Equal(8, categories!.Count);
-        Assert.Equal("Pilates", categories[0].Name);
+        Assert.Equal(12, categories!.Count);
+        Assert.Equal("Sport", categories[0].Name);
         Assert.Equal("Coral", categories[0].Accent);
+        Assert.Equal(8, categories.Count(c => c.ParentId is not null));
         Assert.Equal(categories.OrderBy(c => c.DisplayOrder).Select(c => c.Id), categories.Select(c => c.Id));
     }
 

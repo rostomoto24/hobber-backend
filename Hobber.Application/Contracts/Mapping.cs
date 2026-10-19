@@ -1,6 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using Hobber.Domain.Entities;
 using Hobber.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hobber.Application.Contracts;
 
@@ -17,7 +17,9 @@ public sealed record CourseSummaryRow(
     string CategoryName,
     Accent CategoryAccent,
     int CategoryDisplayOrder,
+    Guid? CategoryParentId,
     CourseFormat Format,
+    CourseLevel Level,
     decimal Price,
     int EnrolledCount,
     int Capacity,
@@ -26,7 +28,7 @@ public sealed record CourseSummaryRow(
 public static class Mapping
 {
     public static CategoryDto ToDto(this Category category) =>
-        new(category.Id, category.Name, category.Accent.ToString(), category.DisplayOrder);
+        new(category.Id, category.Name, category.Accent.ToString(), category.DisplayOrder, category.ParentId);
 
     public static UserDto ToDto(this User user) =>
         new(
@@ -63,7 +65,9 @@ public static class Mapping
             c.Category.Name,
             c.Category.Accent,
             c.Category.DisplayOrder,
+            c.Category.ParentId,
             c.Format,
+            c.Level,
             c.Price,
             c.Enrollments.Count,
             c.Capacity,
@@ -76,8 +80,9 @@ public static class Mapping
             r.ImageUrl,
             r.TutorId,
             PersonName(r.TutorFirstName, r.TutorLastName, r.TutorEmail),
-            new CategoryDto(r.CategoryId, r.CategoryName, r.CategoryAccent.ToString(), r.CategoryDisplayOrder),
+            new CategoryDto(r.CategoryId, r.CategoryName, r.CategoryAccent.ToString(), r.CategoryDisplayOrder, r.CategoryParentId),
             r.Format.ToString(),
+            r.Level.ToString(),
             r.Price,
             r.EnrolledCount,
             r.Capacity,

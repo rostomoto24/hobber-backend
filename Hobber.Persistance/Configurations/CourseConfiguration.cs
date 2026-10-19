@@ -22,6 +22,7 @@ public sealed class CourseConfiguration : IEntityTypeConfiguration<Course>
         builder.Property(course => course.Location).HasMaxLength(300);
         builder.Property(course => course.ImageUrl).HasMaxLength(2048);
         builder.Property(course => course.Format).HasConversion<int>().IsRequired();
+        builder.Property(course => course.Level).HasConversion<int>().IsRequired();
         builder.Property(course => course.Price).HasPrecision(10, 2);
         builder.Property(course => course.Capacity).IsRequired();
 
