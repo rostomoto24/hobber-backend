@@ -17,13 +17,13 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore
-        run: dotnet restore TeachMe.sln
+        run: dotnet restore Hobber.sln
 
       - name: Build
-        run: dotnet build TeachMe.sln --no-restore --configuration Release -warnaserror
+        run: dotnet build Hobber.sln --no-restore --configuration Release -warnaserror
 
       - name: Test
-        run: dotnet test TeachMe.sln --no-build --configuration Release --logger "trx;LogFileName=results.trx"
+        run: dotnet test Hobber.sln --no-build --configuration Release --logger "trx;LogFileName=results.trx"
 
       - name: Upload test results
         if: always()

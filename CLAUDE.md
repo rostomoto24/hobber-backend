@@ -1,4 +1,4 @@
-# Hobber backend (repo still named TeachMe)
+# Hobber backend (repo still named Hobber)
 
 .NET 8 clean-architecture API for Hobber, a marketplace for hobby courses. Product context, decisions and status live one level up in `../docs/`; read `../docs/STATUS.md` and `../docs/DECISIONS.md` first, then `../docs/backlog/backend.md` and the newest entries in `../docs/status/*.md` once those exist.
 
@@ -10,24 +10,24 @@ The Backend role owns everything in this repo. Outside it, only append to `../do
 
 | Project | Role | Depends on |
 |---|---|---|
-| `TeachMe.Domain` | Entities (`User`, `Course`, `Category`, `Enrollment`, …) and enums; static rule helpers on `Course` | nothing |
-| `TeachMe.Application` | One handler class per use case (`Auth/`, `Me/`, `Courses/`, …), `Result`/`Error`, `Validator`, DTOs in `Contracts/`, abstractions (`IAppDbContext`, `ITokenService`, …) | Domain, EF Core abstractions |
-| `TeachMe.Infrastructure` | `JwtTokenService`, `IdentityPasswordHasher`, `LoggingEmailSender`, `SystemClock` | Application |
-| `TeachMe.Persistance` | `TeachMeDbContext` (implements `IAppDbContext`), `Configurations/`, `Migrations/`, `Seeding/DevSeeder` | Domain, Application |
-| `TeachMe.API` | Controllers, `Infrastructure/CurrentUser`, `ResultExtensions` (Result → RFC 7807), `Program.cs` | all of the above |
-| `TeachMe.Tests` | xUnit integration tests via `HobberApiFactory` (SQLite in-memory + `DevSeeder`), one fixture per test class | API |
+| `Hobber.Domain` | Entities (`User`, `Course`, `Category`, `Enrollment`, …) and enums; static rule helpers on `Course` | nothing |
+| `Hobber.Application` | One handler class per use case (`Auth/`, `Me/`, `Courses/`, …), `Result`/`Error`, `Validator`, DTOs in `Contracts/`, abstractions (`IAppDbContext`, `ITokenService`, …) | Domain, EF Core abstractions |
+| `Hobber.Infrastructure` | `JwtTokenService`, `IdentityPasswordHasher`, `LoggingEmailSender`, `SystemClock` | Application |
+| `Hobber.Persistance` | `HobberDbContext` (implements `IAppDbContext`), `Configurations/`, `Migrations/`, `Seeding/DevSeeder` | Domain, Application |
+| `Hobber.API` | Controllers, `Infrastructure/CurrentUser`, `ResultExtensions` (Result → RFC 7807), `Program.cs` | all of the above |
+| `Hobber.Tests` | xUnit integration tests via `HobberApiFactory` (SQLite in-memory + `DevSeeder`), one fixture per test class | API |
 
 Dependency direction: API -> Application -> Domain. Persistance and Infrastructure implement interfaces that Application defines. Controllers never touch `DbContext`; they call a handler and pass its `Result` to `ToActionResult`.
 
 ## Commands
 
 ```
-dotnet build TeachMe.sln                       # green, 0 warnings
-dotnet test TeachMe.sln                        # 22 integration tests, ~2 s
-dotnet run --project TeachMe.API               # https://localhost:51014 , http://localhost:51015
+dotnet build Hobber.sln                       # green, 0 warnings
+dotnet test Hobber.sln                        # 22 integration tests, ~2 s
+dotnet run --project Hobber.API               # https://localhost:51014 , http://localhost:51015
                                                # Development: migrates + seeds LocalDB, Swagger UI at /swagger
-dotnet ef migrations add <Name> -p TeachMe.Persistance -s TeachMe.API -o Migrations
-dotnet ef database update -p TeachMe.Persistance -s TeachMe.API
+dotnet ef migrations add <Name> -p Hobber.Persistance -s Hobber.API -o Migrations
+dotnet ef database update -p Hobber.Persistance -s Hobber.API
 # export the contract after endpoint changes (app running):
 curl -s http://localhost:51015/swagger/v1/swagger.json -o ../docs/api/openapi.json
 ```
